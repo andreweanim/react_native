@@ -12,7 +12,7 @@ const TabIcon = ({icon, color, name, focused}) => {
       tintColor={color}
       className="w-6 h-6"/>
 
-      <Text className={`$ {focused ? 'font-psemibold' : 'font-regular' } text-xs`}></Text>
+      <Text className={`${focused ? 'font-psemibold' : 'font-regular'} text-xs`} style={{color:color}}></Text>
     </View>
   )
 }
@@ -22,7 +22,16 @@ const TabsLayout = () => {
     <>
     <Tabs
     screenOptions={{
-      tarBarShowLabel: false
+      tarBarShowLabel: false,
+      tabBarActiveTintColor: '#FFA001',
+      tabBarInactiveTintColor: '#CDCDE0',
+      tabBarStyle: {
+        backgroundColor: '#161622',
+        borderTopWidth: 1,
+        borderTopColor: '#232533',
+        height: 84,
+
+      }
     }}
     >
       <Tabs.Screen
@@ -41,13 +50,28 @@ const TabsLayout = () => {
       }}/>
 
 <Tabs.Screen
+      name="bookmark"
+      options={{
+        title: 'Bookmark',
+        headerShown: false,
+        tabBarIcon: ({color, focused}) => (
+          <TabIcon
+          icon={icons.bookmark}
+          color={color}
+          name="Bookmark"
+          focused={focused}
+          />
+        )
+      }}/>
+
+<Tabs.Screen
       name="create"
       options={{
         title: 'Create',
         headerShown: false,
         tabBarIcon: ({color, focused}) => (
           <TabIcon
-          icon={icons.home}
+          icon={icons.plus}
           color={color}
           name="Create"
           focused={focused}
@@ -62,24 +86,9 @@ const TabsLayout = () => {
         headerShown: false,
         tabBarIcon: ({color, focused}) => (
           <TabIcon
-          icon={icons.home}
+          icon={icons.profile}
           color={color}
           name="Profile"
-          focused={focused}
-          />
-        )
-      }}/>
-
-<Tabs.Screen
-      name="bookmark"
-      options={{
-        title: 'Bookmark',
-        headerShown: false,
-        tabBarIcon: ({color, focused}) => (
-          <TabIcon
-          icon={icons.home}
-          color={color}
-          name="Bookmark"
           focused={focused}
           />
         )
