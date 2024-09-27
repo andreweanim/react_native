@@ -5,13 +5,12 @@ import {icons} from '../../constants'
 
 const TabIcon = ({icon, color, name, focused}) => {
   return (
-    <View className="items-center justify-center gap">
+    <View className="items-center justify-center">
       <Image
       source={icon}
       resizeMode={"contain"}
       tintColor={color}
       className="w-6 h-6"/>
-
       <Text className={`${focused ? 'font-psemibold' : 'font-regular'} text-xs`} style={{color:color}}></Text>
     </View>
   )
@@ -34,6 +33,7 @@ const TabsLayout = () => {
       }
     }}
     >
+      {/* Tabs.Screen links you to the first Tab Screen form index.js */}
       <Tabs.Screen
       name="home"
       options={{
