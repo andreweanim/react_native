@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import {SplashScreen, Stack} from 'expo-router';
-import {useFonts} from 'expo-font'
+import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { SplashScreen, Stack } from "expo-router";
+import { useFonts } from "expo-font";
+import GlobalProvider from '../context/GlobalProvider'
 
 //prevents auto screen from hiding before assets loading is complete
-SplashScreen.preventAutoHideAsync
+SplashScreen.preventAutoHideAsync;
 
 const RootLayout = () => {
-
   //Special useFonts hook
   const [fontsLoaded, error] = useFonts({
     "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -24,24 +24,23 @@ const RootLayout = () => {
   //Use effect allows to perform some actions while the page/screen is loading
   //has a callback function and dependency array
   useEffect(() => {
-    if(error) throw error;
+    if (error) throw error;
 
-    if(fontsLoaded) SplashScreen.hideAsync
+    if (fontsLoaded) SplashScreen.hideAsync;
+  }, [fontsLoaded, error]);
 
-  }, [fontsLoaded, error])
-
-  if(!fontsLoaded && !error) return null;
+  if (!fontsLoaded && !error) return null;
 
   return (
-    <Stack>
-        <Stack.Screen name="index" options={{headerShown: false}}/>
-        <Stack.Screen name="(auth)" options={{headerShown: false}}/>
-        <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
+    <GlobalProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         {/* <Stack.Screen name="(/search/[query])" options={{headerShown: false}}/> */}
-    </Stack>
-     
-  )
-}
+      </Stack>
+    </GlobalProvider>
+  );
+};
 
-export default RootLayout
-
+export default RootLayout;

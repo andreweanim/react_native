@@ -8,7 +8,12 @@ import { Link } from "expo-router";
 import { createUser } from '../../lib/appwrite'
 import { router } from "expo-router";
 
+import { useGlobalContext } from "../../context/GlobalProvider";
+
 const SignUp = () => {
+
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -26,6 +31,9 @@ const SignUp = () => {
 
     try {
       const result = await createUser(form.email, form.password, form.username)
+      
+      setUser(result)
+      setIsLoggedIn(true)
       
       // set it to global state...
 
